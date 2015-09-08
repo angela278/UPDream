@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>UPDream</title>
+    <meta name="generator" content="Bootply" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/business-casual.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/elusive-icons/css/elusive-icons.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript" src="static/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="space"></div>
+
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="navbar-brand">Search Results</div></div>
+        <a href='/journal' class="btn btn-link top-left"><i class="el el-chevron-left el-2x header-icon pull-left"></i></a>
+
+        <div class="navbar navbar-default navbar-fixed-top second-navbar">
+            <form class="navbar-form" role="search" action="{{url_for('search')}}" method="POST">
+                <div class="input-group">
+                    <input type="text" class="form-control" value='{{ term }}' name="term" id="srch-term">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default search-button" type="submit"><i class="el el-search"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="container">
+            {% if not results %}
+            <div class="row">
+                <div class="box">
+                    <div class="col-lg-12">
+                        <p class="entry-title">There are no matches for your search :(</p>
+                        <p>Try to search again!</p>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            {%- for result in results %}
+            <div class="row">
+                <div class="box">
+                    <div class="col-lg-12">
+                        <p class="entry-title">{{ result.title }}</p>
+                        <p>{{ dafield.make_value_from_datastore(result.content) }}</p>
+                        <hr>
+                        <p>{{ result.date.strftime('%m/%d/%Y | %H:%M') }}</p>
+                    </div>
+                </div>
+            </div>
+            {%- endfor %}
+            {%  endif %}
+        </div>
+    </body>
+    </html>

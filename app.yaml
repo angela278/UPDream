@@ -1,5 +1,5 @@
 application: up-dream
-version: 1
+version: 2
 runtime: python27
 api_version: 1
 threadsafe: yes
@@ -7,9 +7,23 @@ threadsafe: yes
 handlers:
 - url: .*
   script: main.app
+  secure: always
+- url: /_ah/queue/deferred
+  script: google.appengine.ext.deferred.deferred.application
+  login: admin
+
+
+
 
 libraries:
 - name: jinja2
   version: "2.6"
 - name: markupsafe
   version: "0.15"
+- name: ssl 
+  version: latest
+- name: pycrypto
+  version: "2.6"
+
+builtins:
+- deferred: on

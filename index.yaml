@@ -1,0 +1,7 @@
+indexes:
+
+- kind: Page
+  properties:
+  - name: myuser.xid
+  - name: date
+    direction: desc
